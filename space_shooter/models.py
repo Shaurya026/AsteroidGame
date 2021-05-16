@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed May 12 23:42:42 2021
+Created on Wed May 1 23:42:42 2021
 
 @author: shaur
 """
@@ -52,6 +52,7 @@ class Spaceship(GameObject):
         rotated_surface = rotozoom(self.sprite, angle, 1.0)
         rotated_surface_size = Vector2(rotated_surface.get_size())
         blit_position = self.position - rotated_surface_size * 0.5
+        #print(blit_position)
         surface.blit(rotated_surface, blit_position)
     
     def accelerate(self):
@@ -86,8 +87,7 @@ class Asteroid(GameObject):
         self.bomb_sound.play()
         if self.size > 1:
             for _ in range(2):
-                asteroid = Asteroid(
-                    self.position, self.create_asteroid_callback, self.size - 1)
+                asteroid = Asteroid(self.position, self.create_asteroid_callback, self.size - 1)
                 self.create_asteroid_callback(asteroid)
         
 class Bullet(GameObject):

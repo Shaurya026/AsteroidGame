@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed May 12 17:58:36 2021
+Created on Wed May 1 17:58:36 2021
 
 @author: shaur
 """
@@ -70,8 +70,11 @@ class SpaceShooter:
                 quit()
                 
             is_key_pressed = pygame.key.get_pressed()
-            if is_key_pressed[pygame.K_r] and self.survival:
-                self.__init__(2,True,highscore=self.highscore)
+            if is_key_pressed[pygame.K_r]:
+                if self.survival == True:
+                    self.__init__(2,True,highscore=self.highscore)
+                else:
+                    self.__init__(self.level)
             pygame.key.set_repeat(20)
             if self.spaceship:
                 if is_key_pressed[pygame.K_RIGHT]:
@@ -144,7 +147,8 @@ class SpaceShooter:
                     print_text(self.screen, 'Thank You Now Try Survival Mode',self.font)
                     pygame.display.update() 
                     time.sleep(5)
-                    quit()
+                    self.flag = False
+                    return 
                     
                 for i in range(5):
                     self.screen.blit(self.background,(-400,-100))
@@ -158,7 +162,7 @@ class SpaceShooter:
             score(self.screen ,self.score)
             Hscore(self.screen, self.highscore)
         pygame.display.flip()
-        self.clock.tick(120)
+        self.clock.tick(80)
         #print("Collides:", self.spaceship.collides_with(self.asteroid))
         
     def _get_game_objects(self):
